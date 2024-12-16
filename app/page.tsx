@@ -1,12 +1,16 @@
-import React from 'react'
-import Barnerhome from './components/Barnerhome'
+'use client'
 
-const page = () => {
+import { AppProps } from "next/app";
+import { Provider } from "react-redux";
+import { store } from "./Store/store";
+import Home from "./Pages/Home";
+
+function Page() {
   return (
-    <div>
-        <Barnerhome/> sdf
-    </div>
-  )
+    <Provider store={store}>
+        <Home/>
+    </Provider>
+  );
 }
 
-export default page
+export default Page;
