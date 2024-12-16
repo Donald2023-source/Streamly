@@ -6,3 +6,5 @@ export const store = configureStore({
         streamlyData: streamlyreducer
     },
 })
+
+export type RootState = ReturnType<typeof store.getState>;

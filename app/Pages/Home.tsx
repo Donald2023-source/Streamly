@@ -4,7 +4,7 @@ import Header from '../components/Header'
 import Outlet from '../components/Outlet'
 import axiosInstance from '../utils/axiosInstance'
 import { useDispatch } from 'react-redux'
-import { setImageUrl } from '../Store/Streamlyslice'
+import { setBarnerData, setImageUrl } from '../Store/Streamlyslice'
 
 const Home = () => {
 
@@ -20,8 +20,22 @@ const Home = () => {
         }
     }
 
+    const fetchTrendingData = async() => {
+        try {
+          const response = await axiosInstance.get('trending/all/week');
+    
+          dispatch(setBarnerData(response.data.results))
+    
+          console.log('I am response', response.data.results)
+        } catch(error) {
+          console.error(error)
+        }
+      }
+      
+
     useEffect(() =>{
         fetchConfiguration()
+        fetchTrendingData()
     }, [])
   return (
     <div>
