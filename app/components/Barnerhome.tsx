@@ -25,7 +25,7 @@ const Barnerhome = () => {
 
   return (
     <section className="w-full h-full overflow-hidden relative">
-      <div className="flex transition-transform duration-700 ease-in-out" style={{ transform: `translateX(-${currentImage * 100}%)` }}>
+      <div className="flex transition-transform duration-1000  ease-in-out" style={{ transform: `translateX(-${currentImage * 100}%)` }}>
         {barnerData.length > 0 ? (
              barnerData.map((data: { backdrop_path: string }, index) => (
               <div key={index} className="w-full h-[450px] lg:h-[95vh] relative flex-shrink-0">
@@ -37,6 +37,7 @@ const Barnerhome = () => {
                   quality={80}
                   priority={index === currentImage}
                 />
+                <div className='bg-black/60 absolute h-full w-full'></div>
               </div>
             ))
         ) : (
