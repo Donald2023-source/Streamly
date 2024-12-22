@@ -1,16 +1,12 @@
-'use client'
+import React from 'react'
+import Home from './Pages/Home'
 
-import { AppProps } from "next/app";
-import { Provider } from "react-redux";
-import { store } from "./Store/store";
-import Home from "./Pages/Home";
-
-function Page() {
+const page = () => {
   return (
-    <Provider store={store}>
-        <Home/>
-    </Provider>
-  );
+    <div>
+      <Home/>
+    </div>
+  )
 }
 
-export default Page;
+export default page

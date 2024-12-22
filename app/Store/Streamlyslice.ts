@@ -18,6 +18,5 @@ export const streamlySlice = createSlice({
   },
 });
 
-
 export const { setBarnerData, setImageUrl } = streamlySlice.actions;
 export default streamlySlice.reducer;
