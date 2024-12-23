@@ -4,11 +4,11 @@ import axiosInstance from "../utils/axiosInstance";
 
 const useFetch = (endpoint: string) => {
     const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(false);
+ 
 
     const fetchData = async () => {
         try {
-            setLoading(true);
+            
             const response = await axiosInstance.get(endpoint);
             setData(response.data.results); 
         } catch (error) {
@@ -19,7 +19,7 @@ const useFetch = (endpoint: string) => {
     useEffect(() => {
         fetchData();
     }, [endpoint]); 
-    return { data, loading };
+    return { data };
 };
 
 export default useFetch;

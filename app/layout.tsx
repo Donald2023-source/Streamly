@@ -27,13 +27,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body 
-        className={`${geistSans.variable} ${nunito.className} antialiased`}
-      >
-        
+      <body className={`${geistSans.variable} ${nunito.className} antialiased`}>
+        <Navbar/>
         <Provider store={store}>{children}</Provider>
-        
-      </body>
+        </body>
     </html>
   );
 }
