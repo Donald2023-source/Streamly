@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../Store/store';
 import Image from 'next/image';
 import Card from './Card';
+import { Button } from '@/components/ui/button';
 
 const Barnerhome = () => {
   const barnerData = useSelector((state: RootState) => state.streamlyData.barnerData);
@@ -42,6 +43,12 @@ const Barnerhome = () => {
                   <div className='relative top-0 flex flex-col justify-end py-10 px-3 h-full text-white'>
                     <h2 className='font-bold text-2xl py-2'>{data.name || data.original_title}</h2>
                     <p className='text-sm md:w-[60%] lg:text-lg text-gray-400'>{data.overview}</p>
+                     <span className='flex gap-5'>
+                      
+                      <button className='bg-[#ffffff2a] py-2 px-10 hover:bg-primary transition-all rounded backdrop-blur-md'>View</button>
+                      <button className='bg-[#ffffff2a] py-2 px-8 rounded backdrop-blur-md'>Wishlist</button>
+                      
+                     </span>
                   </div>
                 </div>
               </div>
