@@ -11,6 +11,7 @@ import { SlTag } from "react-icons/sl";
 import { Button } from "@/components/ui/button";
 import { FaUser } from "react-icons/fa";
 import user from "../../Assets/userimg.jpg";
+import Card from "@/app/components/Card";
 
 interface movieDetails {
   title: string;
@@ -39,8 +40,8 @@ const Page = () => {
   const fetchCredits = async () => {
     try {
       const response = await axiosInstance.get(`movie/${params.id}/credits`);
-      console.log(response.data.crew);
-      setCrew(response.data.crew);
+      console.log(response.data.cast);
+      setCrew(response.data.cast);
     } catch (err) {
       console.log(err);
     }
@@ -59,7 +60,7 @@ const Page = () => {
     );
   }
 
-  const displayedCrew = showAllCrew ? crew : crew.slice(0, 5);
+  const displayedCrew =  crew
 
   return (
     <div>
@@ -87,25 +88,25 @@ const Page = () => {
           {details.overview}
         </div>
 
-        <h2 className="md:px-10 px-3 font-bold text-gray-600 text-2xl py-4">Crew</h2>
-        <div className="grid md:grid-cols-4 grid-cols-2 lg:grid-cols-5 gap-6 items-center justify-center">
+        <h2 className="md:px-10 px-3 font-bold text-gray-600 text-2xl py-4">Cast</h2>
+        <div className="flex overflow-auto ml-12 gap-2 items-center justify-center">
           {displayedCrew.map(
             (
-              item: { name: string; job: string; profile_path: string },
+              item: { name: string; character: string; profile_path: string },
               idx: number
             ) => (
               <div key={idx}>
-                <div className="flex gap-4 md:w-[16rem] w-52 items-center px-3 md:px-10 py-2 text-sm font-semibold leading-6">
+                <div className="flex flex-col gap-4 md:w-[16rem] w-52 items-center px-3 md:px-10 py-2 text-sm font-semibold leading-6">
                   <Image
                     src={item.profile_path ? `${imageUrl}${item.profile_path}` : user}
                     alt={item.name}
                     width={100}
                     height={100}
-                    className="md:w-14 object-cover h-10 w-10 md:h-14 rounded-full"
+                    className="rounded-lg h-64 object-cover w-72"
                   />
                   <div>
                     <h2 className="font-semibold text-xs">{item?.name}</h2>
-                    <p className="text-xs text-gray-400 font-semibold">{item?.job}</p>
+                    <p className="text-xs text-gray-400 font-semibold">{item?.character}</p>
                   </div>
                 </div>
               </div>
@@ -123,6 +124,15 @@ const Page = () => {
           </div>
         )}
       </div>
+      <div className='pl-12'>
+      <Card Heading='Similar To This' url={`/movie/${params.id}/similar`}/>
+      </div>
+
+      <div className='pl-12'>
+      <Card Heading='Top Tated' url='movie/popular'/>
+      </div>
+
+
     </div>
   );
 };

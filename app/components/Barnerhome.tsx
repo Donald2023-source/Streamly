@@ -59,7 +59,9 @@ const Barnerhome = () => {
        
       </div>
 
+      <div className='pl-12'>
       <Card Heading='Top Tated' url='movie/top_rated'/>
+      </div>
     </section>
   );
 };
