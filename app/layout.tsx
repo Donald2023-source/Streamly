@@ -6,6 +6,7 @@ import { Nunito } from "next/font/google";
 import { Provider } from "react-redux";
 import { store } from "./Store/store";
 import Navbar from "./components/Navbar";
+import NextTopLoader from "nextjs-toploader";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -28,6 +29,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${nunito.className} antialiased`}>
+        <NextTopLoader
+          color="#29D" />
         <Navbar/>
         <Provider store={store}>{children}</Provider>
         </body>

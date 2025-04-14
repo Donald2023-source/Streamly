@@ -20,8 +20,8 @@ const Navbar = () => {
   const [isNav, setIsNav] = useState(false);
 
   return (
-    <div className="fixed z-50 w-full backdrop-blur-lg shadow-md p-2 md:p-3">
-      <div className="flex items-center justify-between">
+    <div className="fixed z-50 w-full backdrop-blur h-fit shadow-md p-2 md:p-3">
+      <div className="flex items-center h-full justify-between">
         <Link href="/">
           <span className="flex items-center space-x-3">
             <Image className="md:h-16 md:w-16 w-10 h-10 rounded-full" src={logo} alt="Logo" />

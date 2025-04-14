@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { RootState } from '../Store/store'
 import { FaChevronLeft, FaChevronRight, FaStar } from "react-icons/fa";
 import Link from 'next/link'
-import page from '../Pages/Movie/[id]/page'
+
 
 type CardProps = {
   url: string,
