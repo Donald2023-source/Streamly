@@ -6,6 +6,7 @@ import { RootState } from '../Store/store';
 import Image from 'next/image';
 import Card from './Card';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 const Barnerhome = () => {
   const barnerData = useSelector((state: RootState) => state.streamlyData.barnerData);
@@ -29,7 +30,7 @@ const Barnerhome = () => {
     <section className="w-full h-full overflow-hidden relative">
       <div className="flex transition-transform duration-1000  ease-in-out" style={{ transform: `translateX(-${currentImage * 100}%)` }}>
         {barnerData.length > 0 ? (
-             barnerData.map((data: { backdrop_path: string, original_title: string, overview: string, name: string}, index) => (
+             barnerData.map((data: { backdrop_path: string, id: number, original_title: string, overview: string, name: string}, index) => (
               <div key={index} className="w-full h-[450px] lg:h-[95vh] relative flex-shrink-0">
                 <Image
                   src={`${imageUrl}${data.backdrop_path}`}
@@ -39,14 +40,16 @@ const Barnerhome = () => {
                   quality={80}
                   priority={index === currentImage}
                 />
-                <div className='bg-black/60 absolute md:px-16  h-full w-full'>
+                <div className='bg-black/60 absolute md:px-16 px-2 h-full w-full'>
                   <div className='relative top-0 flex flex-col justify-end py-10 px-3 h-full text-white'>
                     <h2 className='font-bold text-2xl py-2'>{data.name || data.original_title}</h2>
-                    <p className='text-sm md:w-[60%] lg:text-lg text-gray-400'>{data.overview}</p>
+                    <p className='text-sm md:w-[60%] lg:text-lg text-gray-400 line-clamp-3'>{data.overview}</p>
                      <span className='flex gap-5'>
-                      
-                      <button className='bg-[#ffffff2a] py-2 px-10 hover:bg-primary transition-all rounded backdrop-blur-md'>View</button>
+                     <div className='flex gap-4 pt-4'>
+                       
+                     <Link href={`/movie/${data?.id}`} className='bg-[#ffffff2a] py-2 px-10 hover:bg-primary transition-all rounded backdrop-blur-md'>View</Link >
                       <button className='bg-[#ffffff2a] py-2 px-8 rounded backdrop-blur-md'>Wishlist</button>
+                     </div>
                       
                      </span>
                   </div>
@@ -59,9 +62,6 @@ const Barnerhome = () => {
        
       </div>
 
-      <div className='pl-12'>
-      <Card Heading='Top Tated' url='movie/top_rated'/>
-      </div>
     </section>
   );
 };

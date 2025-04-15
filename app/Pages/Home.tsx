@@ -15,6 +15,7 @@ const Home = () => {
             const response = await axiosInstance('configuration')
             console.log('Config', response)
             dispatch(setImageUrl(response.data.images.secure_base_url+"original"))
+            console.log('I am response', response.data.images.secure_base_url+"original")
         } catch(err) {
             console.error(err)
         }
