@@ -68,9 +68,12 @@ const Page = () => {
             alt={details.title}
             width={1000}
             height={1000}
-            className="w-full pt-1 md:h-[80vh] h-[400px] object-cover"
+            className="w-full rounded-b-lg pt-1 md:h-[80vh] h-[400px] object-cover"
           />
-          <div className="absolute w-fit flex py-5 top-[75%] md:top-[85%] gap-4 left-3 md:left-10">
+
+          <div className="absolute top-0 left-0 border-gray-900 rounded-lg border w-full h-full bg-gradient-to-b  from-black/80 to-black" />
+
+          <div className="absolute w-fit flex py-5 top-[75%] md:top-[65%] lg:top-[80%] gap-4 left-3 md:left-10">
             <Button className="font-semibold py-6 px-10 text-md bg-primary hover:scale-105 transition-all">
               <CiPlay1 className="text-2xl" /> Play
             </Button>
@@ -81,14 +84,15 @@ const Page = () => {
         </div>
       </div>
       <div>
-        <div className="md:px-10 pl-4 py-2 text-sm md:text-lg font-semibold leading-7 md:leading-10">
+        <h2 className="ml-4 md:ml-10 my-4 font-bold text-lg border-b-[1px] w-fit py-2">{details?.title}</h2>
+        <div className="md:px-10 pl-4 py-5 text-sm md:text-lg font-semibold leading-7 md:leading-10">
           {details.overview}
         </div>
 
         <h2 className="md:px-10 px-3 font-bold text-gray-600 text-2xl py-4">
           Cast
         </h2>
-        <div className="flex overflow-auto md:ml-12 gap-2 items-center justify-center">
+        <div className="flex overflow-auto gap-2 items-left justify-start ">
           {crew.map(
             (
               item: { name: string; character: string; profile_path: string },

@@ -47,7 +47,7 @@ const Barnerhome = () => {
                      <span className='flex gap-5'>
                      <div className='flex gap-4 pt-4'>
                        
-                     <Link href={`/movie/${data?.id}`} className='bg-[#ffffff2a] py-2 px-10 hover:bg-primary transition-all rounded backdrop-blur-md'>View</Link >
+                     <Link href={`/Movie/${data?.id}`} className='bg-[#ffffff2a] py-2 px-10 hover:bg-primary transition-all rounded backdrop-blur-md'>View</Link >
                       <button className='bg-[#ffffff2a] py-2 px-8 rounded backdrop-blur-md'>Wishlist</button>
                      </div>
                       

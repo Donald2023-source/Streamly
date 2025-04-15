@@ -42,33 +42,30 @@ const Card: React.FC<CardProps> = ({ Heading, url }) => {
         ref={containerRef}
         className="flex h-full min-w-screen-lg scroll-smooth overflow-x-scroll scrollbar-hide space-x-8"
       >
-        {data.map(
+        {data && data.length > 0 && data.map(
           (
             item: { backdrop_path: string | null; title: string; vote_average: number; id: string },
             idx: number
           ) => (
             <Link href={`/Movie/${item.id}`} key={idx}>
               <div className="min-w-[200px] hover:scale-105 transition-all duration-200 cursor-pointer h-[250px] relative rounded-xl overflow-hidden bg-gray-800">
-                <Image
-                  width={500}
-                  height={500}
-                  src={item.backdrop_path ? `${imageUrl}${item.backdrop_path}` : fallbackImage}
-                  alt={item.title || "Movie poster"}
-                  className="object-cover w-full h-full"
-                  onError={(e) => {
-                    e.currentTarget.src = fallbackImage; // Fallback on error
-                  }}
-                />
-                <div className="text-white z-50 text-sm absolute top-0 bottom-8 w-full flex flex-col justify-end p-3 h-full">
-                  <h4 className="font-semibold">{item.title}</h4>
-                  <div>
-                    <p className="flex gap-1">
-                      <FaStar className="text-yellow-300" />
-                      {item.vote_average.toFixed(1)}
-                    </p>
-                  </div>
-                </div>
-                <div className="absolute bg-gradient-to-t from-black/60 to-black/10 w-full h-full top-0" />
+          <Image
+            width={500}
+            height={500}
+            src={item.backdrop_path ? `${imageUrl}${item.backdrop_path}` : fallbackImage}
+            alt={item.title || "Movie poster"}
+            className="object-cover w-full h-full"
+          />
+          <div className="text-white z-50 text-sm absolute top-0 bottom-8 w-full flex flex-col justify-end p-3 h-full">
+            <h4 className="font-semibold">{item.title}</h4>
+            <div>
+              <p className="flex gap-1">
+                <FaStar className="text-yellow-300" />
+                {item.vote_average.toFixed(1)}
+              </p>
+            </div>
+          </div>
+          <div className="absolute bg-gradient-to-t from-black/60 to-black/10 w-full h-full top-0" />
               </div>
             </Link>
           )
