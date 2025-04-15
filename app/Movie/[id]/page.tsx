@@ -68,7 +68,7 @@ const Page = () => {
             alt={details.title}
             width={1000}
             height={1000}
-            className="w-full pt-1 md:h-full h-[400px] object-cover"
+            className="w-full pt-1 md:h-[80vh] h-[400px] object-cover"
           />
           <div className="absolute w-fit flex py-5 top-[75%] md:top-[85%] gap-4 left-3 md:left-10">
             <Button className="font-semibold py-6 px-10 text-md bg-primary hover:scale-105 transition-all">
@@ -81,14 +81,14 @@ const Page = () => {
         </div>
       </div>
       <div>
-        <div className="md:px-10 px-3 py-2 text-sm md:text-lg font-semibold leading-7 md:leading-10">
+        <div className="md:px-10 pl-4 py-2 text-sm md:text-lg font-semibold leading-7 md:leading-10">
           {details.overview}
         </div>
 
         <h2 className="md:px-10 px-3 font-bold text-gray-600 text-2xl py-4">
           Cast
         </h2>
-        <div className="flex overflow-auto ml-12 gap-2 items-center justify-center">
+        <div className="flex overflow-auto md:ml-12 gap-2 items-center justify-center">
           {crew.map(
             (
               item: { name: string; character: string; profile_path: string },
@@ -108,7 +108,7 @@ const Page = () => {
                     className="rounded-lg md:h-64 object-cover w-32 h-32 md:w-72"
                     priority
                   />
-                  <div>
+                  <div className="text-center">
                     <h2 className="font-semibold text-xs">{item?.name}</h2>
                     <p className="text-xs text-gray-400 font-semibold">
                       {item?.character}
@@ -120,11 +120,11 @@ const Page = () => {
           )}
         </div>
       </div>
-      <div className="pl-5">
+      <div className="md:pl-5">
         <Card Heading="Similar To This" url={`/movie/${params.id}/similar`} />
       </div>
 
-      <div className="pl-5">
+      <div className="md:pl-5">
         <Card Heading="Top Rated" url="/movie/popular" />
       </div>
     </div>
