@@ -40,7 +40,7 @@ const Card: React.FC<CardProps> = ({ isMovie, Heading, url }) => {
 
   return (
     <div className="p-3 m-2 relative">
-      <h2 className="font-semibold text-white text-xl md:text-3xl py-3">
+      <h2 className="font-semibold text-white text-lg md:text-3xl py-3">
         {Heading}
       </h2>
       <div

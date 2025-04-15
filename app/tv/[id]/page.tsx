@@ -20,13 +20,12 @@ interface movieDetails {
   original_name: string;
 }
 
-
-
 const Page = () => {
   const [details, setDetails] = useState<movieDetails | null>(null);
   const [crew, setCrew] = useState([]);
   const [seasons, setSeasons] = useState([]);
   const [selectedSeason, setSelectedSeason] = useState<any | null>(null);
+  const [networks, setNetworks] = useState([])
   const params = useParams();
 
   const imageUrl = "http://image.tmdb.org/t/p/original";
@@ -36,7 +35,8 @@ const Page = () => {
       const response = await axiosInstance.get(`tv/${params.id}`);
       setDetails(response.data);
       setSeasons(response.data.seasons);
-      
+      console.log('data', response.data);
+      setNetworks(response.data.networks)
       const firstValidSeason = response.data.seasons.find(
         (season: { season_number: number }) => season.season_number > 0
       );
@@ -71,8 +71,9 @@ const Page = () => {
   }
 
   // Find the selected season's data
-  const selectedSeasonData:any = seasons.find(
-    (season: { season_number: number, episode_count: number }) => season.season_number === selectedSeason
+  const selectedSeasonData: any = seasons.find(
+    (season: { season_number: number; episode_count: number }) =>
+      season.season_number === selectedSeason
   );
 
   return (
@@ -87,7 +88,7 @@ const Page = () => {
             className="w-full rounded-b-lg pt-1 md:h-[80vh] h-[400px] object-cover"
           />
 
-          <div className="absolute top-0 left-0 border-gray-900 rounded-lg border w-full h-full bg-gradient-to-b from-black/80 to-black" />
+          <div className="absolute top-0 left-0 border-gray-900 rounded-lg border w-full h-full bg-gradient-to-t from-black to-black/40" />
 
           <div className="absolute w-fit flex py-5 top-[75%] md:top-[65%] lg:top-[80%] gap-4 left-3 md:left-10">
             <Button className="font-semibold py-6 px-10 text-md bg-primary hover:scale-105 transition-all">
@@ -100,16 +101,21 @@ const Page = () => {
         </div>
       </div>
       <div>
-        <div className="flex md:gap-12 md:flex-row flex-col py-7 items-start">
-          <div className="md:pl-5 md:px-10 md:w-1/2">
+        <div className="flex md:gap-12  md:flex-row flex-col py-7 items-start">
+          <div className="md:pl-5 md:px-10 px-2 md:w-1/2">
             <h2 className="ml-4 md:ml-5 my-4 font-bold text-xl border-b-[1px] w-fit py-2">
               {details?.title || details?.original_name}
             </h2>
             <h2 className="pl-4 py-5 text-sm md:text-lg font-semibold leading-7 md:leading-10">
               {details?.overview}
             </h2>
+            <div>
+              {seasons.map((item: { spoken_languages: string }, idx) => (
+                <div>{item?.spoken_languages}</div>
+              ))}
+            </div>
           </div>
-          <div className="px-2">
+          <div className="px-6">
             <h2 className="text-lg font-bold">Seasons</h2>
             <div className="flex gap-5 flex-wrap">
               {seasons.map(
@@ -130,9 +136,9 @@ const Page = () => {
               )}
             </div>
             {selectedSeasonData && (
-              <div >
+              <div>
                 <h2 className="text-lg font-bold mt-4">Episodes</h2>
-                <div className="grid lg:grid-cols-6 grid-cols-5 gap-3 md:gap-4">
+                <div className="grid lg:grid-cols-6 md:grid-cols-5 grid-cols-3 gap-8 md:gap-4">
                   {Array.from(
                     { length: selectedSeasonData?.episode_count || 0 },
                     (_, i) => (
@@ -149,6 +155,19 @@ const Page = () => {
             )}
           </div>
         </div>
+
+      <div className="md:p-8 px-2 py-4">
+        <h2 className="px-1 py-4 font-semibold md:text-xl text-lg text-gray-600">NETWORKS</h2>
+      <div className="grid lg:grid-cols-8 md:grid-cols-5 grid-cols-3 gap-8 md:gap-4 ">
+          {
+            networks.map((item: { logo_path: string, }, idx) => (
+              <div className="h-20 w-20 hover:scale-105 transition-all cursor-pointer rounded-full border border-gray-800 p-2">
+                <Image  priority className="h-full w-full object-contain" width={500} height={500} src={`${imageUrl}${item?.logo_path}`} alt="Image" />
+              </div>
+            ))
+          }
+        </div>
+      </div>
 
         <h2 className="md:px-10 px-3 font-bold text-gray-600 text-2xl py-4">
           Cast
