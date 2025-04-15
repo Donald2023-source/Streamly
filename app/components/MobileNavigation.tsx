@@ -5,6 +5,7 @@ import { IoIosTv } from "react-icons/io";
 import { IoIosSearch } from "react-icons/io";
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 const MobileNavigation = () => {
     const navLinks = [
         { name: 'Home', icon: <IoIosHome/>, href: '/' },
@@ -12,12 +13,13 @@ const MobileNavigation = () => {
         { name: 'Movie Release', icon: <IoIosTv />, href: '/movie-release' },
         { name: 'Search', icon: <IoIosSearch />, href: '/search' },
       ];
+      const path = usePathname()
   return (
     <div className='h-20 bg-black/30 backdrop-blur-lg w-full flex justify-between items-center px-10 text-white rounded-2xl'>
       {
         navLinks.map((link, idx) => (
             <div key={idx}>
-                <Link  href={link.href} key={idx} className={`flex flex-col items-center justify-center text-base text-gray-300 hover:text-blue-400 transition py-2 rounded-lg ${link.href === window.location.pathname ? 'text-blue-400' : ''}`}>
+                <Link  href={link.href} key={idx} className={`flex flex-col items-center justify-center text-base text-gray-300 hover:text-blue-400 transition py-2 rounded-lg ${link.href === path  ? 'text-blue-400' : ''}`}>
                     
                     <div className='flex flex-col gap-2 items-center'>
                     <h2 className='text-xl'>{link.icon}</h2>
