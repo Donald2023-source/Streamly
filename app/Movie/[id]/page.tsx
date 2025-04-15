@@ -31,6 +31,7 @@ const Page = () => {
       const response = await axiosInstance.get(`movie/${params.id}`);
       setDetails(response.data);
       console.log(response.data);
+      console.log("I am response", response.data);
     } catch (error) {
       console.error(error);
     }
@@ -89,6 +90,8 @@ const Page = () => {
           {details.overview}
         </div>
 
+        <div></div>
+
         <h2 className="md:px-10 px-3 font-bold text-gray-600 text-2xl py-4">
           Cast
         </h2>
@@ -125,11 +128,11 @@ const Page = () => {
         </div>
       </div>
       <div className="md:pl-5">
-        <Card Heading="Similar To This" url={`/movie/${params.id}/similar`} />
+        <Card isMovie={true} Heading="Similar To This" url={`/movie/${params.id}/similar`} />
       </div>
 
       <div className="md:pl-5">
-        <Card Heading="Top Rated" url="/movie/popular" />
+        <Card isMovie={true} Heading="Top Rated" url="/movie/popular" />
       </div>
     </div>
   );

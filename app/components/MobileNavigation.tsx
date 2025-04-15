@@ -16,7 +16,7 @@ const MobileNavigation = () => {
     <div className='h-20 bg-black/30 backdrop-blur-lg w-full flex justify-between items-center px-10 text-white rounded-2xl'>
       {
         navLinks.map((link, idx) => (
-            <div>
+            <div key={idx}>
                 <Link  href={link.href} key={idx} className={`flex flex-col items-center justify-center text-base text-gray-300 hover:text-blue-400 transition py-2 rounded-lg ${link.href === window.location.pathname ? 'text-blue-400' : ''}`}>
                     
                     <div className='flex flex-col gap-2 items-center'>

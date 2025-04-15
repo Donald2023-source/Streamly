@@ -5,8 +5,8 @@ const Outlet = () => {
   return (
     <div>
       <div className='md:pl-12 py-5'>
-      <Card Heading='Top Tated' url='movie/top_rated'/>
-      <Card Heading='Top TV Series' url='tv/top_rated'/>
+      <Card isMovie={true} Heading='Top Tated' url='movie/top_rated'/>
+      <Card isMovie={false} Heading='Top TV Series' url='tv/top_rated'/>
       </div>
 
       
