@@ -16,7 +16,7 @@ type CardProps = {
 
 const Card: React.FC<CardProps> = ({ Heading, url }) => {
   const { data } = useFetch(url);
-  console.log("UseFetch", data);
+  console.log(Heading, data);
   const imageUrl = useSelector((state: RootState) => state.streamlyData.imageUrl);
 
   console.log("Image URL:", imageUrl);
@@ -44,7 +44,7 @@ const Card: React.FC<CardProps> = ({ Heading, url }) => {
       >
         {data && data.length > 0 && data.map(
           (
-            item: { backdrop_path: string | null; title: string; vote_average: number; id: string },
+            item: { backdrop_path: string | null; title: string; vote_average: number; id: string, original_name: string },
             idx: number
           ) => (
             <Link href={`/Movie/${item.id}`} key={idx}>
@@ -57,7 +57,7 @@ const Card: React.FC<CardProps> = ({ Heading, url }) => {
             className="object-cover w-full h-full"
           />
           <div className="text-white z-50 text-sm absolute top-0 bottom-8 w-full flex flex-col justify-end p-3 h-full">
-            <h4 className="font-semibold">{item.title}</h4>
+            <h4 className="font-semibold">{item?.title || item?.original_name}</h4>
             <div>
               <p className="flex gap-1">
                 <FaStar className="text-yellow-300" />

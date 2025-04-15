@@ -27,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} mb-20 ${nunito.className} antialiased`}>
+      <body className={`${geistSans.variable} mb-16 ${nunito.className} antialiased`}>
         <NextTopLoader color="#29D" />
         <Navbar />
         <Provider store={store}>{children}</Provider>
