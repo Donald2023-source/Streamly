@@ -3,7 +3,7 @@
 import { RootState } from "@/app/Store/store";
 import axiosInstance from "@/app/utils/axiosInstance";
 import { useParams } from "next/navigation";
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Image from "next/image";
 import { CiPlay1 } from "react-icons/ci";
@@ -20,11 +20,13 @@ interface movieDetails {
   original_name: string;
 }
 
+
+
 const Page = () => {
   const [details, setDetails] = useState<movieDetails | null>(null);
   const [crew, setCrew] = useState([]);
   const [seasons, setSeasons] = useState([]);
-  const [epsiode, setEpisode] = useState(0);
+  const [selectedSeason, setSelectedSeason] = useState<any | null>(null);
   const params = useParams();
 
   const imageUrl = "http://image.tmdb.org/t/p/original";
@@ -33,9 +35,14 @@ const Page = () => {
     try {
       const response = await axiosInstance.get(`tv/${params.id}`);
       setDetails(response.data);
-      console.log(response.data);
       setSeasons(response.data.seasons);
-      console.log("I am response", response.data);
+      
+      const firstValidSeason = response.data.seasons.find(
+        (season: { season_number: number }) => season.season_number > 0
+      );
+      if (firstValidSeason) {
+        setSelectedSeason(firstValidSeason.season_number);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -44,7 +51,6 @@ const Page = () => {
   const fetchCredits = async () => {
     try {
       const response = await axiosInstance.get(`tv/${params.id}/credits`);
-      console.log(response.data.cast);
       setCrew(response.data.cast);
     } catch (err) {
       console.log(err);
@@ -64,6 +70,11 @@ const Page = () => {
     );
   }
 
+  // Find the selected season's data
+  const selectedSeasonData:any = seasons.find(
+    (season: { season_number: number, episode_count: number }) => season.season_number === selectedSeason
+  );
+
   return (
     <div>
       <div>
@@ -76,7 +87,7 @@ const Page = () => {
             className="w-full rounded-b-lg pt-1 md:h-[80vh] h-[400px] object-cover"
           />
 
-          <div className="absolute top-0 left-0 border-gray-900 rounded-lg border w-full h-full bg-gradient-to-b  from-black/80 to-black" />
+          <div className="absolute top-0 left-0 border-gray-900 rounded-lg border w-full h-full bg-gradient-to-b from-black/80 to-black" />
 
           <div className="absolute w-fit flex py-5 top-[75%] md:top-[65%] lg:top-[80%] gap-4 left-3 md:left-10">
             <Button className="font-semibold py-6 px-10 text-md bg-primary hover:scale-105 transition-all">
@@ -89,52 +100,60 @@ const Page = () => {
         </div>
       </div>
       <div>
-        <div className="flex md:gap-12 py-7  items-center">
-          <div className="md:pl-5 px-10 md:w-1/2">
-            <h2 className="ml-4 md:ml-5 my-4 font-bold text-lg border-b-[1px] w-fit py-2">
+        <div className="flex md:gap-12 md:flex-row flex-col py-7 items-start">
+          <div className="md:pl-5 md:px-10 md:w-1/2">
+            <h2 className="ml-4 md:ml-5 my-4 font-bold text-xl border-b-[1px] w-fit py-2">
               {details?.title || details?.original_name}
             </h2>
-            <h2 className=" pl-4 py-5 text-sm md:text-lg font-semibold leading-7 md:leading-10">
+            <h2 className="pl-4 py-5 text-sm md:text-lg font-semibold leading-7 md:leading-10">
               {details?.overview}
             </h2>
           </div>
-          <div>
+          <div className="px-2">
             <h2 className="text-lg font-bold">Seasons</h2>
-            <h2 className="flex gap-5 flex-wrap">
+            <div className="flex gap-5 flex-wrap">
               {seasons.map(
                 (item: { season_number: number; name: string }, idx) =>
                   item.season_number > 0 && (
-                    <div key={idx} className="">
-                      <h2 className="text-sm p-2 h-16 hover:shadow-xl cursor-pointer transition-all hover:scale-105 my-4 flex items-center justify-center font-bold w-16 rounded-xl shadow-sm border border-gray-800 shadow-primary">
-                        {item.season_number}
-                      </h2>
+                    <div
+                      key={`season-${idx}`}
+                      className={`text-sm p-2 h-16 cursor-pointer transition-all hover:scale-105 my-4 flex items-center justify-center font-bold w-16 rounded-xl shadow-sm border ${
+                        selectedSeason === item.season_number
+                          ? "bg-primary text-white border-primary"
+                          : "border-gray-800 hover:shadow-xl"
+                      }`}
+                      onClick={() => setSelectedSeason(item.season_number)}
+                    >
+                      {item.season_number}
                     </div>
                   )
               )}
-            </h2>
-            {seasons.map((item: { episode_count: number }, idx) => (
-              <div key={idx}>
-                <div>
-                  <h2 className="grid lg:grid-cols-6 gap-4">
-                    {Array.from({ length: item?.episode_count }, (_, i) => (
+            </div>
+            {selectedSeasonData && (
+              <div >
+                <h2 className="text-lg font-bold mt-4">Episodes</h2>
+                <div className="grid lg:grid-cols-6 grid-cols-5 gap-3 md:gap-4">
+                  {Array.from(
+                    { length: selectedSeasonData?.episode_count || 0 },
+                    (_, i) => (
                       <div
-                        key={i}
-                        className="h-20 my-2 w-24 px-3 py-8 text-sm font-semibold text-white bg-gray-900 rounded-lg shadow-md"
+                        key={`episode-${i}`}
+                        className="h-20 my-2 w-24 px-3 py-8 text-sm font-semibold text-white bg-gray-900 rounded-lg shadow-md flex items-center justify-center"
                       >
                         Episode {i + 1}
                       </div>
-                    ))}
-                  </h2>
+                    )
+                  )}
                 </div>
               </div>
-            ))}
+            )}
           </div>
         </div>
 
         <h2 className="md:px-10 px-3 font-bold text-gray-600 text-2xl py-4">
           Cast
         </h2>
-        <div className="flex overflow-auto gap-2 items-left justify-start ">
+        <div className="flex overflow-auto gap-2 items-left justify-start">
           {crew.map(
             (
               item: { name: string; character: string; profile_path: string },
