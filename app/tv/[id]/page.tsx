@@ -146,7 +146,7 @@ const Page = () => {
             {selectedSeasonData && (
               <div>
                 <h2 className="text-lg font-bold mt-4">Episodes</h2>
-               <EpisodeGrid selectedSeasonData={selectedSeasonData}  />
+                <EpisodeGrid selectedSeasonData={selectedSeasonData} />
               </div>
             )}
           </div>
@@ -210,12 +210,17 @@ const Page = () => {
       <div className="md:pl-5">
         <Card
           isMovie={true}
-          Heading="Similar To This"
-          url={`/tv/${params.id}/similar`}
+          Heading="Recommendations"
+          url={`tv/${params.id}/recommendations`}
         />
       </div>
 
       <div className="md:pl-5">
+        <Card
+          isMovie={true}
+          Heading="Similar To This"
+          url={`/tv/${params.id}/similar`}
+        />
         <Card isMovie={true} Heading="Top Rated" url="/movie/popular" />
       </div>
     </div>
