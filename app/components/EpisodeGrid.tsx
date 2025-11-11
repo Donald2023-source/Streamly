@@ -38,7 +38,7 @@ const EpisodeGrid = ({ selectedSeasonData }: Props) => {
           className="mt-6 px-6 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
         >
           {
-            visibleEpisodes != 0 && visibleEpisodes ? "Hide" : "Show All"
+            visibleEpisodes === 0 && visibleEpisodes ? "Hide" : "Show All"
               
           }
         </button>

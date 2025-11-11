@@ -1,6 +1,5 @@
 "use client";
-
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import useFetch from "../Hooks/useFetch";
 import { useSelector } from "react-redux";
 import Image from "next/image";
@@ -17,7 +16,7 @@ type CardProps = {
 
 const Card: React.FC<CardProps> = ({ isMovie, Heading, url }) => {
   const { data } = useFetch(url);
-  console.log(Heading, data);
+
   const imageUrl = useSelector(
     (state: RootState) => state.streamlyData.imageUrl
   );
@@ -25,18 +24,6 @@ const Card: React.FC<CardProps> = ({ isMovie, Heading, url }) => {
   console.log("Image URL:", imageUrl);
 
   const containerRef = useRef<HTMLDivElement | null>(null);
-
-  const handleNext = () => {
-    if (containerRef.current) {
-      containerRef.current.scrollLeft += 300;
-    }
-  };
-
-  const handlePrev = () => {
-    if (containerRef.current) {
-      containerRef.current.scrollLeft -= 300;
-    }
-  };
 
   return (
     <div className="p-3 m-2 relative">
@@ -47,8 +34,7 @@ const Card: React.FC<CardProps> = ({ isMovie, Heading, url }) => {
         ref={containerRef}
         className="flex h-full min-w-screen-lg scroll-smooth overflow-x-scroll scrollbar-hide space-x-8"
       >
-        {data &&
-          data.length > 0 &&
+        {data && data.length > 0 ? (
           data.map(
             (
               item: {
@@ -91,7 +77,10 @@ const Card: React.FC<CardProps> = ({ isMovie, Heading, url }) => {
                 </div>
               </Link>
             )
-          )}
+          )
+        ) : (
+          <h2>Loading...</h2>
+        )}
       </div>
       {/* Uncomment if you want navigation buttons back */}
       {/* <div className="flex absolute inset-32 left-0 right-0 w-full z-20 justify-between mt-4">
