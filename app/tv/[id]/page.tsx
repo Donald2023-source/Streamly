@@ -13,6 +13,8 @@ import { FaUser } from "react-icons/fa";
 import user from "../../Assets/userimg.jpg";
 import Card from "@/app/components/Card";
 import EpisodeGrid from "@/app/components/EpisodeGrid";
+import VideoPlayer from "@/app/components/VideoPlayer";
+import useFetch from "@/app/Hooks/useFetch";
 
 interface movieDetails {
   title: string;
@@ -21,6 +23,10 @@ interface movieDetails {
   original_name: string;
 }
 
+interface tr {
+  name: string;
+  key: string;
+}
 const Page = () => {
   const [details, setDetails] = useState<movieDetails | null>(null);
   const [crew, setCrew] = useState([]);
@@ -28,9 +34,12 @@ const Page = () => {
   const [selectedSeason, setSelectedSeason] = useState<any | null>(null);
   const [networks, setNetworks] = useState([]);
   const [isVisible, setIsVisible] = useState(false);
+  const [videoDetail, setVideoDetail] = useState<any>(null);
   const params = useParams();
 
   const imageUrl = "http://image.tmdb.org/t/p/original";
+  const { data: video } = useFetch(`/tv/${params?.id}/videos`);
+  const trailer = video[2];
 
   const fetchDetails = async () => {
     try {
@@ -222,6 +231,13 @@ const Page = () => {
           url={`/tv/${params.id}/similar`}
         />
         <Card isMovie={true} Heading="Top Rated" url="/movie/popular" />
+      </div>
+
+      <div className="fixed inset-0 bg-black z-50 flex items-center justify-center">
+        {Array.isArray(trailer) &&
+          trailer?.map((item: tr) => (
+            <VideoPlayer name={item?.name} key={item?.key} />
+          ))}
       </div>
     </div>
   );

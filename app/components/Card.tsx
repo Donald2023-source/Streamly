@@ -16,6 +16,7 @@ type CardProps = {
 
 const Card: React.FC<CardProps> = ({ isMovie, Heading, url }) => {
   const { data } = useFetch(url);
+  console.log("Heading", data);
 
   const imageUrl = useSelector(
     (state: RootState) => state.streamlyData.imageUrl
