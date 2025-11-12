@@ -40,6 +40,7 @@ const Page = () => {
   const imageUrl = "http://image.tmdb.org/t/p/original";
   const { data: video } = useFetch(`/tv/${params?.id}/videos`);
   const trailer = video[2];
+  console.log(video[2]);
 
   const fetchDetails = async () => {
     try {
@@ -234,10 +235,7 @@ const Page = () => {
       </div>
 
       <div className="fixed inset-0 bg-black z-50 flex items-center justify-center">
-        {Array.isArray(trailer) &&
-          trailer?.map((item: tr) => (
-            <VideoPlayer name={item?.name} key={item?.key} />
-          ))}
+        <VideoPlayer name={video[1]?.name} videokey={video[1]?.key} />
       </div>
     </div>
   );

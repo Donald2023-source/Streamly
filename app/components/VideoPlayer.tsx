@@ -1,17 +1,16 @@
 import React from "react";
 
 interface Props {
-  key: string;
+  videokey: string;
   name: string;
 }
-const VideoPlayer = ({ key, name }: Props) => {
+const VideoPlayer = ({ videokey, name }: Props) => {
   return (
     <div>
       <h2>Video Player Component</h2>
       <iframe
-        src={`https://www.youtube.com/embed/${key}`}
+        src={`https://www.youtube.com/embed/${videokey}`}
         title={name}
-     
         allowFullScreen
         width="560"
         height="315"
