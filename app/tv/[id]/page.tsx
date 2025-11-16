@@ -86,7 +86,7 @@ const Page = () => {
     );
   }
 
-  // Find the selected season's data
+  
   const selectedSeasonData: any = seasons.find(
     (season: { season_number: number; episode_count: number }) =>
       season.season_number === selectedSeason
