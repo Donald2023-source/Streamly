@@ -39,8 +39,7 @@ const Page = () => {
 
   const imageUrl = "http://image.tmdb.org/t/p/original";
   const { data: video } = useFetch(`/tv/${params?.id}/videos`);
-  const trailer = video[2];
-  console.log(video[2]);
+  
 
   const fetchDetails = async () => {
     try {
