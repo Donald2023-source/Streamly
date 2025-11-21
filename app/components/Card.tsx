@@ -6,7 +6,8 @@ import Image from "next/image";
 import { RootState } from "../Store/store";
 import { FaChevronLeft, FaChevronRight, FaStar } from "react-icons/fa";
 import Link from "next/link";
-import fallbackImage from "../Assets/userimg.jpg"; // Reuse your fallback image
+import fallbackImage from "../Assets/userimg.jpg";
+import fallBackCard from "../Assets/fallback img.jpg";
 
 type CardProps = {
   url: string;
@@ -58,13 +59,13 @@ const Card: React.FC<CardProps> = ({ isMovie, Heading, url }) => {
                     src={
                       item.backdrop_path
                         ? `${imageUrl}${item.backdrop_path}`
-                        : fallbackImage
+                        : fallBackCard
                     }
                     alt={item.title || "Movie poster"}
                     className="object-cover w-full h-full"
                   />
                   <div className="text-white z-50 text-sm absolute top-0 bottom-8 w-full flex flex-col justify-end p-3 h-full">
-                    <h4 className="font-semibold">
+                    <h4 className="font-semibold line-clamp-1">
                       {item?.title || item?.original_name}
                     </h4>
                     <div>
