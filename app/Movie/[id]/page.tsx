@@ -85,7 +85,9 @@ const Page = () => {
         </div>
       </div>
       <div>
-        <h2 className="ml-4 md:ml-10 my-4 font-bold text-lg border-b-[1px] w-fit py-2">{details?.title}</h2>
+        <h2 className="ml-4 md:ml-10 my-4 font-bold text-lg border-b-[1px] w-fit py-2">
+          {details?.title}
+        </h2>
         <div className="md:px-10 pl-4 py-5 text-sm md:text-lg font-semibold leading-7 md:leading-10">
           {details.overview}
         </div>
@@ -128,7 +130,11 @@ const Page = () => {
         </div>
       </div>
       <div className="md:pl-5">
-        <Card isMovie={true} Heading="Similar To This" url={`/movie/${params.id}/similar`} />
+        <Card
+          isMovie={true}
+          Heading="Similar To This"
+          url={`/movie/${params.id}/similar`}
+        />
       </div>
 
       <div className="md:pl-5">

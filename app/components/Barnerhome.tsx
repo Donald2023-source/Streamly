@@ -34,7 +34,10 @@ const Barnerhome = () => {
     <section className="w-full h-full overflow-hidden relative">
       <div
         className="flex transition-transform duration-1000  ease-in-out"
-        style={{ transform: `translateX(-${currentImage * 100}%)` }}
+        style={{
+          transform: `translateX(-${currentImage * 100}%)`,
+          opacity: 0.5,
+        }}
       >
         {barnerData.length > 0 ? (
           barnerData.map(
