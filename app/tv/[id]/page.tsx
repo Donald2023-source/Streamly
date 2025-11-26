@@ -35,11 +35,11 @@ const Page = () => {
   const [networks, setNetworks] = useState([]);
   const [isVisible, setIsVisible] = useState(false);
   const [videoDetail, setVideoDetail] = useState<any>(null);
+  const [viewDetails, setViewDetails] = useState(false);
   const params = useParams();
 
   const imageUrl = "http://image.tmdb.org/t/p/original";
   const { data: video } = useFetch(`/tv/${params?.id}/videos`);
-  
 
   const fetchDetails = async () => {
     try {
@@ -85,7 +85,6 @@ const Page = () => {
     );
   }
 
-  
   const selectedSeasonData: any = seasons.find(
     (season: { season_number: number; episode_count: number }) =>
       season.season_number === selectedSeason
@@ -108,7 +107,10 @@ const Page = () => {
           <div className="absolute top-0 left-0 border-gray-900 rounded-lg border w-full h-full bg-gradient-to-t from-black to-black/40" />
 
           <div className="absolute w-fit flex py-5 top-[75%] md:top-[65%] lg:top-[80%] gap-4 left-3 md:left-10">
-            <Button className="font-semibold py-6 px-10 text-md bg-primary hover:scale-105 transition-all">
+            <Button
+              onClick={() => setViewDetails(true)}
+              className="font-semibold py-6 px-10 text-md bg-primary hover:scale-105 transition-all"
+            >
               <CiPlay1 className="text-2xl" /> Play
             </Button>
             <Button className="font-semibold py-6 px-10 text-md bg-primary hover:scale-105 transition-all">
@@ -233,9 +235,11 @@ const Page = () => {
         <Card isMovie={true} Heading="Top Rated" url="/movie/popular" />
       </div>
 
-      <div className="fixed inset-0 bg-black z-50 flex items-center justify-center">
-        <VideoPlayer name={video[1]?.name} videokey={video[1]?.key} />
-      </div>
+      {viewDetails && (
+        <div className="fixed inset-0 bg-black z-50 flex items-center justify-center">
+          <VideoPlayer name={video[1]?.name} videokey={video[1]?.key} />
+        </div>
+      )}
     </div>
   );
 };
