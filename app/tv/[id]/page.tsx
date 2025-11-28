@@ -120,6 +120,7 @@ const Page = () => {
         </div>
       </div>
       <div>
+        
         <div className="flex md:gap-12  md:flex-row flex-col py-7 items-start">
           <div className="md:pl-5 md:px-10 px-2 md:w-1/2">
             <h2 className="ml-4 md:ml-5 my-4 font-bold text-xl border-b-[1px] w-fit py-2">
