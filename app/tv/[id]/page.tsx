@@ -111,7 +111,7 @@ const Page = () => {
               onClick={() => setViewDetails(true)}
               className="font-semibold py-6 px-10 text-md bg-primary hover:scale-105 transition-all"
             >
-              <CiPlay1 className="text-2xl" /> Play
+              <CiPlay1 className="text-2xl" /> Play Trailer
             </Button>
             <Button className="font-semibold py-6 px-10 text-md bg-primary hover:scale-105 transition-all">
               <SlTag className="text-2xl" /> Wishlist
@@ -121,7 +121,7 @@ const Page = () => {
       </div>
       <div>
         <div className="flex md:gap-12  md:flex-row flex-col py-7 items-start">
-          <div className="md:pl-5 md:px-10 px-2 md:w-1/2 border">
+          <div className="md:pl-5 md:px-10 px-2 md:w-1/2">
             <h2 className="ml-4 md:ml-5 my-4 font-bold text-xl border-b-[1px] w-fit py-2">
               {details?.title || details?.original_name}
             </h2>
@@ -236,8 +236,12 @@ const Page = () => {
       </div>
 
       {viewDetails && (
-        <div className="fixed inset-0 bg-black z-50 flex items-center justify-center">
-          <VideoPlayer name={video[1]?.name} videokey={video[1]?.key} />
+        <div className="fixed inset-0 bg-black/20 backdrop-blur-md z-50 flex items-center justify-center">
+          <VideoPlayer
+            isVisible={() => setViewDetails(false)}
+            name={video[1]?.name}
+            videokey={video[1]?.key}
+          />
         </div>
       )}
     </div>
