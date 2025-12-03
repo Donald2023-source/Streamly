@@ -8,6 +8,7 @@ import { FaChevronLeft, FaChevronRight, FaStar } from "react-icons/fa";
 import Link from "next/link";
 import fallbackImage from "../Assets/userimg.jpg";
 import fallBackCard from "../Assets/fallback img.jpg";
+import CardSkeleton from "./SkeletonLoader";
 
 type CardProps = {
   url: string;
@@ -81,7 +82,7 @@ const Card: React.FC<CardProps> = ({ isMovie, Heading, url }) => {
             )
           )
         ) : (
-          <h2>Loading...</h2>
+          <CardSkeleton />
         )}
       </div>
       {/* Uncomment if you want navigation buttons back */}
