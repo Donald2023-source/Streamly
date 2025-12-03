@@ -103,6 +103,9 @@ const Page = () => {
             height={1000}
             className="w-full rounded-b-lg pt-1 md:h-[80vh] h-[400px] object-cover"
           />
+          
+
+          
 
           <div className="absolute top-0 left-0 border-gray-900 rounded-lg border w-full h-full bg-gradient-to-t from-black to-black/40" />
 
