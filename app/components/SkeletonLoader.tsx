@@ -26,6 +26,8 @@ const CardSkeleton: React.FC = () => {
               <div className="h-4 bg-gray-500 rounded-md w-20 animate-pulse" />
             </div>
 
+            
+
             <div className="absolute bg-gradient-to-t from-black/60 to-black/10 w-full h-full top-0" />
           </div>
         ))}
