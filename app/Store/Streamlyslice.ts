@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  barnerData: [], 
+  barnerData: [],
   imageUrl: "",
+  tmdbKey: "",
+  accountId: "",
 };
 
 export const streamlySlice = createSlice({
@@ -15,8 +17,15 @@ export const streamlySlice = createSlice({
     setImageUrl: (state, action) => {
       state.imageUrl = action.payload;
     },
+    setTmdKey: (state, action) => {
+      state.tmdbKey = action.payload;
+    },
+    setAccountId: (state, action) => {
+      state.accountId = action.payload;
+    },
   },
 });
 
-export const { setBarnerData, setImageUrl } = streamlySlice.actions;
+export const { setBarnerData, setImageUrl, setTmdKey, setAccountId } =
+  streamlySlice.actions;
 export default streamlySlice.reducer;

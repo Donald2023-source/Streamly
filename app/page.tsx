@@ -1,14 +1,16 @@
-'use client'
+"use client";
 
 import { AppProps } from "next/app";
 import { Provider } from "react-redux";
 import { store } from "./Store/store";
 import Home from "./Pages/Home";
+import { ToastContainer } from "react-toastify";
 
 function Page() {
   return (
-    <Provider  store={store}>
-        <Home/>
+    <Provider store={store}>
+      <Home />
+      <ToastContainer />
     </Provider>
   );
 }

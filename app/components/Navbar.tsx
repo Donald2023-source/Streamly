@@ -35,7 +35,7 @@ const Navbar = () => {
 
         <BiMenuAltLeft
           onClick={() => setIsNav(!isNav)}
-          className="text-white text-2xl cursor-pointer lg:hidden hover:scale-125"
+          className="text-white hidden text-2xl cursor-pointer lg:hidden hover:scale-125"
         />
 
         <div

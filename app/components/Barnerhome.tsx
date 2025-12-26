@@ -17,8 +17,8 @@ const Barnerhome = () => {
   );
   const [currentImage, setCurrentImage] = useState(0);
 
-  console.log("Image URL:", imageUrl);
-  console.log("Barner Data:", barnerData);
+  // console.log("Image URL:", imageUrl);
+  // console.log("Barner Data:", barnerData);
 
   useEffect(() => {
     if (!barnerData.length) return;
@@ -63,12 +63,12 @@ const Barnerhome = () => {
                   quality={80}
                   priority={index === currentImage}
                 />
-                <div className="bg-black/60 absolute md:px-16 px-2 h-full w-full">
+                <div className=" absolute md:px-16 px-2 h-full w-full">
                   <div className="relative top-0 flex flex-col justify-end py-10 px-3 h-full text-white">
                     <h2 className="font-bold text-2xl py-2">
                       {data.name || data.original_title}
                     </h2>
-                    <p className="text-sm md:w-[60%] lg:text-lg text-gray-400 line-clamp-3">
+                    <p className="text-sm md:w-[60%] lg:text-lg line-clamp-3">
                       {data.overview}
                     </p>
                     <span className="flex gap-5">

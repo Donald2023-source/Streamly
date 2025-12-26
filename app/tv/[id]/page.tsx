@@ -15,6 +15,7 @@ import Card from "@/app/components/Card";
 import EpisodeGrid from "@/app/components/EpisodeGrid";
 import VideoPlayer from "@/app/components/VideoPlayer";
 import useFetch from "@/app/Hooks/useFetch";
+import { toast } from "react-toastify";
 
 interface movieDetails {
   title: string;
@@ -40,6 +41,8 @@ const Page = () => {
 
   const imageUrl = "http://image.tmdb.org/t/p/original";
   const { data: video } = useFetch(`/tv/${params?.id}/videos`);
+
+  const { accountId } = useSelector((state: RootState) => state.streamlyData);
 
   const fetchDetails = async () => {
     try {
@@ -91,6 +94,15 @@ const Page = () => {
   );
 
   const slicedNetworks = networks.slice(0, 5);
+  console.log("details", details);
+
+  async function addToWatchList() {
+    console.log("clicked");
+    try {
+    } catch (error) {
+      console.error("Error adding to watchlist:", error);
+    }
+  }
 
   return (
     <div>
@@ -103,9 +115,6 @@ const Page = () => {
             height={1000}
             className="w-full rounded-b-lg pt-1 md:h-[80vh] h-[400px] object-cover"
           />
-          
-
-          
 
           <div className="absolute top-0 left-0 border-gray-900 rounded-lg border w-full h-full bg-gradient-to-t from-black to-black/40" />
 
@@ -116,14 +125,16 @@ const Page = () => {
             >
               <CiPlay1 className="text-2xl" /> Play Trailer
             </Button>
-            <Button className="font-semibold py-6 px-10 text-md bg-primary hover:scale-105 transition-all">
+            <Button
+              onClick={() => addToWatchList()}
+              className="font-semibold py-6 px-10 text-md bg-primary hover:scale-105 transition-all"
+            >
               <SlTag className="text-2xl" /> Wishlist
             </Button>
           </div>
         </div>
       </div>
       <div>
-        
         <div className="flex md:gap-12  md:flex-row flex-col py-7 items-start">
           <div className="md:pl-4 md:px-10 px-2 md:w-1/2">
             <h2 className="ml-4 md:ml-5 my-4 font-bold text-xl border-b-[1px] w-fit py-2">

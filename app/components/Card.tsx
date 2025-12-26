@@ -85,15 +85,6 @@ const Card: React.FC<CardProps> = ({ isMovie, Heading, url }) => {
           <CardSkeleton />
         )}
       </div>
-      {/* Uncomment if you want navigation buttons back */}
-      {/* <div className="flex absolute inset-32 left-0 right-0 w-full z-20 justify-between mt-4">
-        <button onClick={handlePrev} className="text-white text-2xl cursor-pointer">
-          <FaChevronLeft />
-        </button>
-        <button onClick={handleNext} className="text-white text-2xl cursor-pointer">
-          <FaChevronRight />
-        </button>
-      </div> */}
     </div>
   );
 };
