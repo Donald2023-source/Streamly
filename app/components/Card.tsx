@@ -9,14 +9,15 @@ import Link from "next/link";
 import fallbackImage from "../Assets/userimg.jpg";
 import fallBackCard from "../Assets/fallback img.jpg";
 import CardSkeleton from "./SkeletonLoader";
-
+import { twMerge } from "tailwind-merge";
 type CardProps = {
   url: string;
   Heading: string;
   isMovie: boolean;
+  className?:string
 };
 
-const Card: React.FC<CardProps> = ({ isMovie, Heading, url }) => {
+const Card: React.FC<CardProps> = ({ isMovie, Heading, url, className }) => {
   const { data } = useFetch(url);
   console.log("Heading", data);
 
@@ -35,7 +36,7 @@ const Card: React.FC<CardProps> = ({ isMovie, Heading, url }) => {
       </h2>
       <div
         ref={containerRef}
-        className="flex h-full min-w-screen-lg scroll-smooth overflow-x-scroll scrollbar-hide space-x-8"
+        className={twMerge('flex h-full min-w-screen-lg scroll-smooth overflow-x-scroll scrollbar-hide space-x-8', className)}
       >
         {data && data.length > 0 ? (
           data.map(
