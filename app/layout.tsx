@@ -9,6 +9,7 @@ import Navbar from "./components/Navbar";
 import NextTopLoader from "nextjs-toploader";
 import MobileNavigation from "./components/MobileNavigation";
 import { usePathname } from "next/navigation";
+import { ToastContainer } from "react-toastify";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -42,6 +43,7 @@ export default function RootLayout({
         {path != "/auth" && <Navbar />}
         <Provider store={store}>{children}</Provider>
       </body>
+      <ToastContainer position="top-right"/>
       <div className="fixed bottom-0 z-50  w-full md:hidden">
         <MobileNavigation />
       </div>

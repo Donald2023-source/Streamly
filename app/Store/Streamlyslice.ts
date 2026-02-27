@@ -5,6 +5,7 @@ const initialState = {
   imageUrl: "",
   tmdbKey: "",
   accountId: "",
+  isAuthenticated: false
 };
 
 export const streamlySlice = createSlice({
@@ -23,9 +24,12 @@ export const streamlySlice = createSlice({
     setAccountId: (state, action) => {
       state.accountId = action.payload;
     },
+    setisAuthenticated: (state, action) => {
+      state.isAuthenticated = action.payload
+    }
   },
 });
 
-export const { setBarnerData, setImageUrl, setTmdKey, setAccountId } =
+export const { setBarnerData, setImageUrl, setTmdKey, setAccountId, setisAuthenticated } =
   streamlySlice.actions;
 export default streamlySlice.reducer;
