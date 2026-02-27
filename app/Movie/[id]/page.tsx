@@ -75,9 +75,9 @@ const Page = () => {
           <div className="absolute top-0 left-0 border-gray-900 rounded-lg border w-full h-full bg-gradient-to-b  from-black/80 to-black" />
 
           <div className="absolute w-fit flex py-5 top-[75%] md:top-[65%] lg:top-[80%] gap-4 left-3 md:left-10">
-            <Button className="font-semibold py-6 px-10 text-md bg-primary hover:scale-105 transition-all">
+            {/* <Button className="font-semibold py-6 px-10 text-md bg-primary hover:scale-105 transition-all">
               <CiPlay1 className="text-2xl" /> Play
-            </Button>
+            </Button> */}
             <Button className="font-semibold py-6 px-10 text-md bg-primary hover:scale-105 transition-all">
               <SlTag className="text-2xl" /> Wishlist
             </Button>
@@ -101,7 +101,7 @@ const Page = () => {
           {crew.map(
             (
               item: { name: string; character: string; profile_path: string },
-              idx: number
+              idx: number,
             ) => (
               <div key={idx}>
                 <div className="flex flex-col gap-4 md:w-64 w-32 items-center px-3 md:px-10 py-2 text-sm font-semibold leading-6">
@@ -125,7 +125,7 @@ const Page = () => {
                   </div>
                 </div>
               </div>
-            )
+            ),
           )}
         </div>
       </div>

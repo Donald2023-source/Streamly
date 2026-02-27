@@ -4,12 +4,12 @@ import type React from "react";
 
 const CardSkeleton: React.FC = () => {
   return (
-    <div className="p-3 m-2 relative">
+    <div className="md:p-3 md:m-2 relative">
       <div className="mb-3 py-3">
         <div className="h-8 bg-gray-700 rounded-md w-48 animate-pulse" />
       </div>
 
-      <div className="grid grid-cols-6   h-full min-w-screen-lg overflow-x-scroll scrollbar-hide space-x-8">
+      <div className="grid grid-cols-3 md:grid-cols-6 h-full min-w-screen-lg overflow-x-scroll scrollbar-hide md:space-x-8 gap-x-64">
         {Array.from({ length: 6 }).map((_, idx) => (
           <div
             key={idx}
