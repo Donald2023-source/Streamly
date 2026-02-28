@@ -11,15 +11,12 @@ const ExploreCard = ({ data, trending, index, media_type }: any) => {
   const imageURL = useSelector(
     (state: RootState) => state?.streamlyData.imageUrl,
   );
-
+  
   const mediaType = data.media_type ?? media_type;
   return (
-    <Link
-      href={"/" + mediaType + "/" + data.id}
-      className="min-w-[200px] hover:scale-105 transition-all duration-200 cursor-pointer h-[250px] relative rounded-xl overflow-hidden bg-gray-800"
-    >
+    <Link href={"/" + mediaType + "/" + data.id}>
       {data ? (
-        <div className="min-w-[200px] hover:scale-105 transition-all duration-200 cursor-pointer h-[250px] relative rounded-xl overflow-hidden bg-gray-800">
+        <div className="min-w-[20px] hover:scale-105 transition-all duration-200 cursor-pointer h-[250px] relative rounded-xl overflow-hidden bg-gray-800">
           <Image
             width={500}
             height={500}

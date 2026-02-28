@@ -50,12 +50,14 @@ const Page = () => {
     fetchData();
   }, [params.explore]);
   return (
-    <div className="py-16 absolute top-24 left-0 px-4 md:px-0 md:pl-12 right-0">
+    <div className="py-16 absolute top-10 left-0 md:px-12 px-5 right-0">
       <div className="container mx-auto">
-        <h3 className="capitalize text-lg font-semibold my-3">Discover</h3>
-        <p>Here's room for you to discover a lot of generes</p>
-        
-        <div className="grid lg:grid-cols-6 md:grid-cols-4 grid-cols-2 justify-center gap-6 lg:justify-start">
+        <span className="flex flex-col items-center justify-center text-center my-5">
+          <h3 className="capitalize text-xl font-semibold my-2">Discover</h3>
+          <p>Here's room for you to discover a lot of generes</p>
+        </span>
+
+        <div className="grid lg:grid-cols-6 md:grid-cols-4 grid-cols-1 justify-center gap-10 lg:justify-start">
           {data.map((exploreData, index) => {
             return (
               <ExploreCard
