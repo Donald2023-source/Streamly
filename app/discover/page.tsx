@@ -1,42 +1,74 @@
 "use client";
-import React, { useEffect } from "react";
-import Header from "../components/Header";
-
-import { useDispatch } from "react-redux";
-import DiscoverBarner from "../components/DiscoverBarner";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
 import Card from "../components/Card";
-import useFetch from "../Hooks/useFetch";
+import ExploreCard from "../components/ExploreCard";
+import axiosInstance from "../utils/axiosInstance";
 
-interface genre {
-  name: string;
-}
-const Home = () => {
-  const dispatch = useDispatch();
-  const { data } = useFetch("/genre/movie/list?language=en");
-  console.log(data);
+const Page = () => {
+  const [pageNumber, setPageNumber] = useState(1);
+  const [data, setData] = useState<any[]>([]);
+  const [totalPageNo, setTotalPageNo] = useState(0);
+
+  const params = useParams();
+  const fetchData = async () => {
+    try {
+      const response = await axiosInstance.get(`/discover/movie`, {
+        params: {
+          page: pageNumber,
+        },
+      });
+
+      setData((prev) => {
+        return [...prev, ...response.data.results];
+      });
+      setTotalPageNo(response.data.total_pages);
+      console.log("explore:", response.data.results);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleScroll = () => {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+      setPageNumber((prev) => prev + 1);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, [pageNumber]);
+
+  useEffect(() => {
+    setPageNumber(0);
+    setData([]);
+    fetchData();
+  }, [params.explore]);
   return (
-    <div className="absolute md:pl-12 py-4 top-24 left-0 right-0">
-      {/* <DiscoverBarner /> */}
-      <div className="pl-5">
-        <h2 className="font-semibold text-white text-lg md:text-3xl py-3">
-          Genres
-        </h2>
-        {data?.map((item: genre, idx: number) => (
-          <span>{item?.name}</span>
-        ))}
-      </div>
-      <div className=" py-5">
-        <Card isMovie={true} Heading="Top Tated" url="movie/top_rated" />
-        <Card isMovie={false} Heading="Top TV Series" url="tv/top_rated" />
-        <Card isMovie={true} Heading="Upcoming" url="movie/upcoming" />
-        <Card
-          isMovie={false}
-          Heading="Tv Series Airing Today"
-          url="tv/airing_today"
-        />
+    <div className="py-16 absolute top-24 left-0 px-4 md:px-0 md:pl-12 right-0">
+      <div className="container mx-auto">
+        <h3 className="capitalize text-lg font-semibold my-3">Discover</h3>
+        <p>Here's room for you to discover a lot of generes</p>
+        
+        <div className="grid lg:grid-cols-6 md:grid-cols-4 grid-cols-2 justify-center gap-6 lg:justify-start">
+          {data.map((exploreData, index) => {
+            return (
+              <ExploreCard
+                data={exploreData}
+                key={index}
+                media_type={params.explore}
+              />
+            );
+          })}
+        </div>
       </div>
     </div>
   );
 };
 
-export default Home;
+export default Page;
