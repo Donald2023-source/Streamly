@@ -10,10 +10,10 @@ import Link from "next/link";
 
 const Barnerhome = () => {
   const barnerData = useSelector(
-    (state: RootState) => state.streamlyData.barnerData
+    (state: RootState) => state.streamlyData.barnerData,
   );
   const imageUrl = useSelector(
-    (state: RootState) => state.streamlyData.imageUrl
+    (state: RootState) => state.streamlyData.imageUrl,
   );
   const [currentImage, setCurrentImage] = useState(0);
 
@@ -33,10 +33,9 @@ const Barnerhome = () => {
   return (
     <section className="w-full h-full overflow-hidden relative">
       <div
-        className="flex transition-transform duration-1000  ease-in-out"
+        className="flex relative transition-transform duration-1000  ease-in-out"
         style={{
           transform: `translateX(-${currentImage * 100}%)`,
-          opacity: 0.5,
         }}
       >
         {barnerData.length > 0 ? (
@@ -49,12 +48,13 @@ const Barnerhome = () => {
                 overview: string;
                 name: string;
               },
-              index: any
+              index: any,
             ) => (
               <div
                 key={index}
                 className="w-full h-[450px] lg:h-[95vh] relative flex-shrink-0"
               >
+                <div className="absolute w-full h-full z-50 bg-black/70 top-0" />
                 <Image
                   src={`${imageUrl}${data.backdrop_path}`}
                   alt={`Barner Image ${index + 1}`}
@@ -63,7 +63,7 @@ const Barnerhome = () => {
                   quality={80}
                   priority={index === currentImage}
                 />
-                <div className=" absolute md:px-16 px-2 h-full w-full">
+                <div className=" absolute z-50 md:px-16 px-2 h-full w-full">
                   <div className="relative top-0 flex flex-col justify-end py-10 px-3 h-full text-white">
                     <h2 className="font-bold text-2xl py-2">
                       {data.name || data.original_title}
@@ -87,7 +87,7 @@ const Barnerhome = () => {
                   </div>
                 </div>
               </div>
-            )
+            ),
           )
         ) : (
           <div className="font-bold text-5xl text-center absolute">
